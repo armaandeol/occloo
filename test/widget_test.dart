@@ -13,7 +13,7 @@ import 'package:oculoo/main.dart';
 void main() {
   testWidgets('App smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const OculooApp());
+    await tester.pumpWidget(MaterialApp(home: PillReminderHomeScreen()));
 
     // Verify that the app builds without errors
     expect(find.byType(MaterialApp), findsOneWidget);

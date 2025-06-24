@@ -11,98 +11,143 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // Background with characters
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [AppColors.backgroundGradientStart, AppColors.backgroundGradientEnd],
-              )),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: RadialGradient(
+            center: Alignment.center,
+            radius: 1.0,
+            colors: [
+              Color(0xFFD7263D), // red accent
+              Color(0xFF18181A), // dark background
+            ],
           ),
-          
-          // Cartoon characters area
-          Positioned(
-            top: 50,
-            left: 0,
-            right: 0,
-            child: SizedBox(
-              height: 300,
-              child: Stack(
-                children: [
-                  Positioned(
-                    top: 40,
-                    left: 30,
-                    child: CharacterWidget(color: Colors.blue[200]!),
-                  ),
-                  Positioned(
-                    top: 100,
-                    right: 40,
-                    child: CharacterWidget(color: Colors.pink[200]!),
-                  ),
-                  Positioned(
-                    top: 180,
-                    left: 100,
-                    child: SpeechBubbleWidget(text: 'Hello~'),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          
-          // Content
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  'Oculoo',
-                  style: GoogleFonts.quicksand(
-                    fontSize: AppSizes.titleFontSize,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: AppSpacing.medium),
-                Text(
-                  'Your friendly medication companion',
-                  style: GoogleFonts.quicksand(
-                    fontSize: AppSizes.subtitleFontSize,
-                    color: AppColors.textSecondary,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: AppSpacing.extraLarge),
-                ElevatedButton(
-                  onPressed: () => Navigator.push(context, 
-                    MaterialPageRoute(builder: (context) => const LoginScreen())),
-                  child: const Text('Sign In'),
-                ),
-                const SizedBox(height: AppSpacing.small),
-                OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: AppSizes.buttonPadding),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppSizes.borderRadius),
-                    ),
-                  ),
-                  onPressed: () => Navigator.push(context, 
-                    MaterialPageRoute(builder: (context) => const SignUpScreen())),
-                  child: const Text(
-                    'Create Account',
-                    style: TextStyle(color: AppColors.primary),
+                // Characters section
+                SizedBox(
+                  height: 300,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top: 20,
+                        left: 20,
+                        child: CharacterWidget(color: Colors.blue[200]!),
+                      ),
+                      Positioned(
+                        top: 60,
+                        right: 30,
+                        child: CharacterWidget(color: Colors.pink[200]!),
+                      ),
+                      Positioned(
+                        top: 120,
+                        left: 80,
+                        child: SpeechBubbleWidget(text: 'Hello~'),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: AppSpacing.bottomPadding),
+                
+                const Spacer(),
+                
+                // Main content box - moved higher up
+                Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.7),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.black, width: 2),
+                  ),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Oculoo',
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFF5F5DC), // beige
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'Your friendly medication companion',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Color(0xFFFFF8E1), // light beige
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 32),
+                      
+                      // Sign In button
+                      SizedBox(
+                        width: double.infinity,
+                        height: 56,
+                        child: ElevatedButton(
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const LoginScreen()),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFD7263D).withOpacity(0.85),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: const Text(
+                            'Sign In',
+                            style: TextStyle(
+                              color: AppColors.beige,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      
+                      const SizedBox(height: 12),
+                      
+                      // Create Account button
+                      SizedBox(
+                        width: double.infinity,
+                        height: 56,
+                        child: OutlinedButton(
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const SignUpScreen()),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            side: const BorderSide(
+                              color: AppColors.beige,
+                              width: 2,
+                            ),
+                          ),
+                          child: const Text(
+                            'Create Account',
+                            style: TextStyle(
+                              color: AppColors.beige,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                
+                const Spacer(),
               ],
             ),
-          )
-        ],
+          ),
+        ),
       ),
     );
   }
@@ -115,7 +160,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sign In')),
+      appBar: null,
       body: const AuthForm(isLogin: true),
     );
   }
@@ -127,8 +172,8 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Create Account')),
+      appBar: null,
       body: const AuthForm(isLogin: false),
     );
   }
-} 
+}

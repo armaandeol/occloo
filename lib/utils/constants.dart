@@ -7,6 +7,7 @@ class AppColors {
   static const Color textPrimary = Color(0xFF4A4A4A);
   static const Color textSecondary = Color(0xFF6C6C6C);
   static const Color white = Colors.white;
+  static const Color beige = Color(0xFFF5F5DC);
 }
 
 class AppSizes {

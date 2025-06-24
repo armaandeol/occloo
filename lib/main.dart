@@ -20,6 +20,7 @@ class OculooApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Oculoo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: GoogleFonts.quicksandTextTheme(
@@ -40,7 +41,7 @@ class OculooApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
-            return snapshot.hasData ? const HomeScreen() : const WelcomeScreen();
+            return snapshot.hasData ? PillReminderHomeScreen() : const WelcomeScreen();
           }
           return const Scaffold(
             body: Center(
